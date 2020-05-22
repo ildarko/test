@@ -1,0 +1,27 @@
+import { Directive, Input, ElementRef, OnChanges, Renderer2 } from '@angular/core';
+
+@Directive({
+  selector: '[DolValid]'
+})
+export class DolValidDirective implements OnChanges {
+
+  constructor(private el: ElementRef, private renderer: Renderer2) { }
+
+  @Input('DolValid') DolValidValue: any;  
+
+  ngOnChanges(changes){  
+    const classDander = "text-danger";
+    let label = this.el.nativeElement.children[0];
+
+    if (changes.DolValidValue.currentValue)
+    {
+      this.renderer.removeClass(label, classDander);
+    }
+    else
+    {
+      this.renderer.addClass(label, classDander);
+    }
+  }
+}
+
+
